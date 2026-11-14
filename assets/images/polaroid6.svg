@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="100%" height="100%">
+  <defs>
+    <radialGradient id="cakeBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#34133b"/>
+      <stop offset="55%" stop-color="#210a26"/>
+      <stop offset="100%" stop-color="#110514"/>
+    </radialGradient>
+    <linearGradient id="cakeTierGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f8ad9d"/>
+      <stop offset="30%" stop-color="#fcd5ce"/>
+      <stop offset="70%" stop-color="#ffb7b2"/>
+      <stop offset="100%" stop-color="#d88392"/>
+    </linearGradient>
+    <linearGradient id="frostingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fce1e4"/>
+    </linearGradient>
+    <radialGradient id="flameGrad" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#fff8db"/>
+      <stop offset="40%" stop-color="#ffbe76"/>
+      <stop offset="80%" stop-color="#ff5252"/>
+      <stop offset="100%" stop-color="#ff1744" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cakeGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="700" fill="url(#cakeBg)"/>
+
+  <!-- Cake Stand / Pedestal -->
+  <ellipse cx="300" cy="510" rx="170" ry="18" fill="#e8b4b8" stroke="#fcd5ce" stroke-width="2"/>
+  <path d="M 285 528 L 270 575 L 330 575 L 315 528 Z" fill="#d88392"/>
+  <ellipse cx="300" cy="575" rx="80" ry="12" fill="#e8b4b8"/>
+
+  <!-- Bottom Tier -->
+  <rect x="180" y="420" width="240" height="90" rx="14" fill="url(#cakeTierGrad)"/>
+  <!-- Bottom Frosting drips -->
+  <path d="M 180 435 Q 200 455 220 435 Q 240 460 260 435 Q 280 465 300 435 Q 320 460 340 435 Q 360 465 380 435 Q 400 455 420 435 L 420 420 L 180 420 Z" fill="url(#frostingGrad)"/>
+
+  <!-- Top Tier -->
+  <rect x="220" y="340" width="160" height="80" rx="12" fill="url(#cakeTierGrad)"/>
+  <!-- Top Frosting drips -->
+  <path d="M 220 352 Q 240 372 260 352 Q 280 377 300 352 Q 320 377 340 352 Q 360 372 380 352 L 380 340 L 220 340 Z" fill="url(#frostingGrad)"/>
+
+  <!-- Strawberries / Toppings -->
+  <circle cx="250" cy="336" r="12" fill="#c9184a"/>
+  <circle cx="300" cy="334" r="14" fill="#a01a3d"/>
+  <circle cx="350" cy="336" r="12" fill="#c9184a"/>
+
+  <!-- Central Candle -->
+  <rect x="295" y="275" width="10" height="60" rx="3" fill="#ffe5ec" stroke="#f8ad9d" stroke-width="1.5"/>
+  <!-- Diagonal stripes on candle -->
+  <line x1="295" y1="290" x2="305" y2="285" stroke="#e8b4b8" stroke-width="2.5"/>
+  <line x1="295" y1="310" x2="305" y2="305" stroke="#e8b4b8" stroke-width="2.5"/>
+  <line x1="295" y1="330" x2="305" y2="325" stroke="#e8b4b8" stroke-width="2.5"/>
+  <!-- Wick -->
+  <line x1="300" y1="275" x2="300" y2="265" stroke="#444" stroke-width="2"/>
+
+  <!-- Candle Flame -->
+  <g transform="translate(300, 248)" filter="url(#cakeGlow)">
+    <ellipse cx="0" cy="0" rx="12" ry="20" fill="url(#flameGrad)"/>
+    <ellipse cx="0" cy="4" rx="5" ry="10" fill="#fffbe6"/>
+  </g>
+
+  <!-- Sparkles around cake -->
+  <g fill="#ffe5ec" filter="url(#cakeGlow)">
+    <circle cx="160" cy="310" r="3"/>
+    <circle cx="440" cy="320" r="4"/>
+    <circle cx="140" cy="440" r="2.5"/>
+    <circle cx="460" cy="450" r="3.5"/>
+    <circle cx="210" cy="220" r="3"/>
+    <circle cx="390" cy="210" r="3"/>
+  </g>
+
+  <!-- Golden 15 badge/sparkle -->
+  <g transform="translate(300, 465)">
+    <circle cx="0" cy="0" r="18" fill="rgba(255, 255, 255, 0.25)" stroke="#fff" stroke-width="1.5"/>
+    <text x="0" y="6" font-family="'Poppins', sans-serif" font-weight="700" font-size="16" fill="#fff" text-anchor="middle">15</text>
+  </g>
+
+  <text x="300" y="650" font-family="'Great Vibes', cursive, serif" font-size="34" fill="#ffd1dc" text-anchor="middle">15 November Celebration</text>
+</svg>

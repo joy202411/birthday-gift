@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="100%" height="100%">
+  <defs>
+    <radialGradient id="jarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4cc" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ffb88c" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#de6262" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1b1030" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="lightGlow">
+      <feGaussianBlur stdDeviation="7" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Midnight Plum Background -->
+  <rect width="600" height="700" fill="#180a26"/>
+
+  <!-- Background Warm Aura -->
+  <circle cx="300" cy="350" r="220" fill="url(#jarGlow)"/>
+
+  <!-- Wooden Table / Base -->
+  <path d="M 0 530 Q 300 510 600 530 L 600 700 L 0 700 Z" fill="#291136"/>
+
+  <!-- Mason Jar Silhouette & Glass Highlights -->
+  <!-- Jar Neck & Lid -->
+  <rect x="230" y="160" width="140" height="25" rx="5" fill="#fcd5ce" stroke="#e8b4b8" stroke-width="2"/>
+  <rect x="220" y="185" width="160" height="15" rx="4" fill="#d88392"/>
+  <!-- Twine string tied around neck -->
+  <path d="M 220 192 Q 300 205 380 192" stroke="#ffb7b2" stroke-width="3" fill="none"/>
+  <path d="M 300 200 Q 280 230 290 260 M 300 200 Q 320 230 310 255" stroke="#ffb7b2" stroke-width="2" fill="none"/>
+
+  <!-- Glass Body -->
+  <rect x="200" y="200" width="200" height="290" rx="40" fill="rgba(255, 230, 240, 0.12)" stroke="rgba(255, 214, 224, 0.5)" stroke-width="3"/>
+  <!-- Glass Reflection highlight -->
+  <path d="M 220 230 Q 215 340 220 450" stroke="rgba(255, 255, 255, 0.4)" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Fairy Light Wire (Tangled inside) -->
+  <path d="M 240 240 Q 350 260 360 320 Q 370 380 260 360 Q 230 420 330 440 Q 370 450 350 470" fill="none" stroke="#d4af37" stroke-width="1.8"/>
+
+  <!-- Glowing Firefly / Fairy light dots -->
+  <g filter="url(#lightGlow)">
+    <circle cx="240" cy="240" r="7" fill="#fff" stroke="#ffbe76" stroke-width="4"/>
+    <circle cx="310" cy="270" r="8" fill="#fff" stroke="#ffbe76" stroke-width="5"/>
+    <circle cx="350" cy="320" r="9" fill="#fff" stroke="#ffd166" stroke-width="5"/>
+    <circle cx="280" cy="340" r="8" fill="#fff" stroke="#ff9f43" stroke-width="4"/>
+    <circle cx="250" cy="380" r="9" fill="#fff" stroke="#ffbe76" stroke-width="5"/>
+    <circle cx="320" cy="400" r="10" fill="#fff" stroke="#ffd166" stroke-width="6"/>
+    <circle cx="280" cy="450" r="8" fill="#fff" stroke="#ffbe76" stroke-width="4"/>
+    <circle cx="350" cy="460" r="7" fill="#fff" stroke="#ff9f43" stroke-width="4"/>
+  </g>
+
+  <!-- Escaping lights floating up into the dark -->
+  <g filter="url(#lightGlow)">
+    <circle cx="160" cy="180" r="5" fill="#fff" stroke="#ffbe76" stroke-width="3" opacity="0.8"/>
+    <circle cx="430" cy="150" r="6" fill="#fff" stroke="#ffd166" stroke-width="3" opacity="0.9"/>
+    <circle cx="380" cy="90" r="5" fill="#fff" stroke="#ffbe76" stroke-width="3" opacity="0.85"/>
+    <circle cx="220" cy="110" r="4" fill="#fff" stroke="#ffbe76" stroke-width="2" opacity="0.7"/>
+  </g>
+
+  <text x="300" y="650" font-family="'Great Vibes', cursive, serif" font-size="34" fill="#ffd1dc" text-anchor="middle">Bottle of Dreams</text>
+</svg>

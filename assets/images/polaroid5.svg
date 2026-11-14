@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="100%" height="100%">
+  <defs>
+    <radialGradient id="roseBg" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#3c1538"/>
+      <stop offset="50%" stop-color="#230d29"/>
+      <stop offset="100%" stop-color="#120617"/>
+    </radialGradient>
+    <linearGradient id="petalGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0f3"/>
+      <stop offset="50%" stop-color="#ffb3c1"/>
+      <stop offset="100%" stop-color="#c9184a"/>
+    </linearGradient>
+    <linearGradient id="petalGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffccd5"/>
+      <stop offset="60%" stop-color="#ff758f"/>
+      <stop offset="100%" stop-color="#800f2f"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="5" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="700" fill="url(#roseBg)"/>
+
+  <!-- Botanical branch -->
+  <path d="M 120 540 Q 240 400 310 330 Q 380 260 480 160" stroke="#77324c" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M 280 350 Q 360 380 430 360" stroke="#77324c" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 200 440 Q 150 390 140 330" stroke="#77324c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Leaves -->
+  <g fill="#934b61" opacity="0.85">
+    <path d="M 360 370 Q 390 350 420 375 Q 390 400 360 370 Z"/>
+    <path d="M 160 370 Q 140 340 120 350 Q 130 380 160 370 Z"/>
+    <path d="M 440 200 Q 470 180 490 210 Q 460 230 440 200 Z"/>
+  </g>
+
+  <!-- Main Center Blossom -->
+  <g transform="translate(310, 320)" filter="url(#softGlow)">
+    <!-- Outer petals -->
+    <path d="M 0 0 C -60 -90 60 -90 0 0" fill="url(#petalGrad1)" opacity="0.9"/>
+    <path d="M 0 0 C -90 -40 -90 60 0 0" fill="url(#petalGrad1)" opacity="0.9"/>
+    <path d="M 0 0 C -50 80 50 80 0 0" fill="url(#petalGrad1)" opacity="0.9"/>
+    <path d="M 0 0 C 80 -40 80 60 0 0" fill="url(#petalGrad1)" opacity="0.9"/>
+    
+    <!-- Rotated Petals -->
+    <g transform="rotate(45)">
+      <path d="M 0 0 C -60 -70 60 -70 0 0" fill="url(#petalGrad2)" opacity="0.85"/>
+      <path d="M 0 0 C -70 -30 -70 50 0 0" fill="url(#petalGrad2)" opacity="0.85"/>
+      <path d="M 0 0 C -40 70 40 70 0 0" fill="url(#petalGrad2)" opacity="0.85"/>
+      <path d="M 0 0 C 70 -30 70 50 0 0" fill="url(#petalGrad2)" opacity="0.85"/>
+    </g>
+
+    <!-- Center core pistils -->
+    <circle cx="0" cy="0" r="16" fill="#ffd166"/>
+    <circle cx="-5" cy="-4" r="3" fill="#ffe3e0"/>
+    <circle cx="4" cy="5" r="3" fill="#ffe3e0"/>
+    <circle cx="5" cy="-3" r="2.5" fill="#ffe3e0"/>
+    <circle cx="-3" cy="5" r="2.5" fill="#ffe3e0"/>
+  </g>
+
+  <!-- Secondary Smaller Blossom -->
+  <g transform="translate(460, 180) scale(0.65)" filter="url(#softGlow)">
+    <path d="M 0 0 C -60 -80 60 -80 0 0" fill="url(#petalGrad1)"/>
+    <path d="M 0 0 C -80 -30 -80 50 0 0" fill="url(#petalGrad1)"/>
+    <path d="M 0 0 C -40 70 40 70 0 0" fill="url(#petalGrad1)"/>
+    <path d="M 0 0 C 70 -30 70 50 0 0" fill="url(#petalGrad1)"/>
+    <circle cx="0" cy="0" r="12" fill="#ffd166"/>
+  </g>
+
+  <!-- Small Bud on left -->
+  <g transform="translate(140, 330) scale(0.55)" filter="url(#softGlow)">
+    <path d="M 0 0 C -50 -70 50 -70 0 0" fill="url(#petalGrad2)"/>
+    <circle cx="0" cy="0" r="10" fill="#ffd166"/>
+  </g>
+
+  <!-- Drifting Petals -->
+  <g fill="url(#petalGrad1)" opacity="0.75">
+    <ellipse cx="200" cy="220" rx="14" ry="8" transform="rotate(-30 200 220)"/>
+    <ellipse cx="430" cy="420" rx="16" ry="9" transform="rotate(25 430 420)"/>
+    <ellipse cx="260" cy="480" rx="12" ry="7" transform="rotate(45 260 480)"/>
+    <ellipse cx="470" cy="270" rx="10" ry="6" transform="rotate(-15 470 270)"/>
+  </g>
+
+  <text x="300" y="650" font-family="'Great Vibes', cursive, serif" font-size="34" fill="#ffd1dc" text-anchor="middle">Grace & Everlasting Bloom</text>
+</svg>

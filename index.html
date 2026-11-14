@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+  <meta name="theme-color" content="#1b1030" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="A magical, animated birthday surprise website for Sreoshi Roy • 15 November" />
+  <title>Happy Birthday Sreoshi Roy ✨ 15 November</title>
+
+  <!-- Google Fonts: Great Vibes (Script Headings) & Poppins (Modern Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- GSAP CDN (With robust native JS fallback in script.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <!-- Canvas Confetti CDN (With native fallback in script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js" defer></script>
+</head>
+<body>
+
+  <!-- =========================================================================
+       BACKGROUND CANVAS & ATMOSPHERE LAYERS
+       ========================================================================= -->
+  <canvas id="starfield-canvas" class="canvas-layer"></canvas>
+  <canvas id="fireworks-canvas" class="canvas-layer"></canvas>
+  <canvas id="confetti-canvas" class="canvas-layer"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="ambient-glow-orb ambient-glow-1"></div>
+  <div class="ambient-glow-orb ambient-glow-2"></div>
+  <div class="ambient-glow-orb ambient-glow-3"></div>
+
+  <!-- Floating Balloons Container -->
+  <div id="balloon-stream" class="balloon-stream" aria-hidden="true"></div>
+
+  <!-- Background Music Audio Element (Preloaded real romantic soundtrack with Web Audio fallback) -->
+  <audio id="bg-music-audio" src="assets/audio/birthday.mp3" loop preload="auto"></audio>
+  <input type="file" id="custom-music-file-input" accept="audio/*" style="display:none;" aria-label="Upload custom music" />
+
+  <!-- =========================================================================
+       TOP FLOATING BAR: BRAND BADGE & AUDIO CONTROLLER
+       ========================================================================= -->
+  <header class="top-bar">
+    <div class="brand-badge">
+      <span class="sparkle-dot"></span>
+      <span>Sreoshi Roy • 15 Nov</span>
+    </div>
+
+    <!-- Music Controls Container -->
+    <div class="music-controls-group">
+      <button id="btn-music-toggle" class="music-toggle-btn" aria-label="Toggle background music" title="Play or pause music">
+        <div class="music-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span id="music-status-text">Music Off</span>
+      </button>
+
+      <!-- Track Switcher Pill & Dropdown -->
+      <button id="btn-music-menu" class="music-track-btn" aria-label="Select soundtrack" title="Click to change track">
+        <span id="current-track-name">🎵 Tender & Hopeful</span>
+      </button>
+
+      <div id="music-dropdown-menu" class="music-dropdown-menu">
+        <button class="track-item-btn active" data-track-src="assets/audio/birthday.mp3" data-track-name="🎵 Tender & Hopeful">
+          ✨ Tender & Hopeful Longing
+        </button>
+        <button class="track-item-btn" data-track-src="assets/audio/amar_moyna.mp3" data-track-name="🎵 Shonar Moyna">
+          🌸 আমার সোনার ময়না পাখি
+        </button>
+        <button class="track-item-btn" data-track-src="synth" data-track-name="🔔 Music Box Celesta">
+          🔔 Enchanted Music Box Synth
+        </button>
+        <button id="btn-upload-custom-music" class="track-item-btn">
+          📂 Upload Custom Song...
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       FLOATING QUICK SCENE NAVIGATION DOCK (Desktop & Tablet)
+       ========================================================================= -->
+  <nav class="scene-nav-dock" aria-label="Scene navigation">
+    <button class="nav-dot active" data-target="scene-intro" aria-label="Scene 1: Introduction">
+      <span class="dot-tooltip">Intro & Gift</span>
+    </button>
+    <button class="nav-dot" data-target="scene-countdown" aria-label="Scene 2: Grand Reveal">
+      <span class="dot-tooltip">The Reveal</span>
+    </button>
+    <button class="nav-dot" data-target="scene-gallery" aria-label="Scene 3: Photo Memories">
+      <span class="dot-tooltip">Memories</span>
+    </button>
+    <button class="nav-dot" data-target="scene-wishes" aria-label="Scene 4: Wish Bubbles">
+      <span class="dot-tooltip">Wish Bubbles</span>
+    </button>
+    <button class="nav-dot" data-target="scene-candle" aria-label="Scene 5: Make a Wish">
+      <span class="dot-tooltip">Make A Wish</span>
+    </button>
+  </nav>
+
+  <!-- =========================================================================
+       SCENE 1: DARK INTRO WITH GLOWING GIFT BOX
+       ========================================================================= -->
+  <section id="scene-intro" class="scene">
+    <div class="container-narrow">
+      <div class="date-pill">✨ 15 November • A Magical Day ✨</div>
+
+      <h1 class="scene-title text-rose-gold">A Special Surprise</h1>
+      <p class="scene-subtitle">
+        For the extraordinary <strong>Sreoshi Roy</strong>.<br />
+        An enchanted experience woven with starlight, golden memories, and warmest wishes.
+      </p>
+
+      <!-- 3D Glowing Gift Box -->
+      <div class="gift-stage-wrapper">
+        <div class="gift-aura"></div>
+        <div class="gift-shadow"></div>
+
+        <div id="gift-box-3d" class="gift-box-3d" title="Tap to open your gift">
+          <!-- Sparkles orbiting -->
+          <div class="sparkle-orbiter" aria-hidden="true">
+            <span class="sparkle-node">✨</span>
+            <span class="sparkle-node">🌟</span>
+            <span class="sparkle-node">💫</span>
+            <span class="sparkle-node">✨</span>
+          </div>
+
+          <!-- Silky Ribbon Bow -->
+          <div class="gift-bow">
+            <div class="gift-bow-left"></div>
+            <div class="gift-bow-right"></div>
+            <div class="gift-bow-center"></div>
+          </div>
+
+          <!-- Box Lid & Base -->
+          <div class="gift-box-lid"></div>
+          <div class="gift-box-base"></div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button id="btn-open-gift" class="btn-primary glow-pulse" type="button">
+        Tap To Open Surprise 🎁
+      </button>
+      <p class="hint-tap">🎧 Turn your audio up for the sweetest experience</p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       COUNTDOWN OVERLAY (3-2-1 Cinematic Sequence)
+       ========================================================================= -->
+  <div id="countdown-overlay" class="countdown-overlay" aria-hidden="true">
+    <div id="countdown-number" class="countdown-number">3</div>
+    <div id="countdown-tagline" class="countdown-tagline">A moment to remember...</div>
+  </div>
+
+  <!-- =========================================================================
+       SCENE 2: 3-2-1 COUNTDOWN & GRAND REVEAL
+       ========================================================================= -->
+  <section id="scene-countdown" class="scene">
+    <div class="container-narrow">
+      <div id="reveal-card" class="glass-card reveal-card">
+        <div class="date-pill">🌸 15 November 🌸</div>
+
+        <h2 class="scene-title text-rose-gold">Happy Birthday, Sreoshi Roy!</h2>
+
+        <!-- Typewriter Container -->
+        <div class="typewriter-box">
+          <p id="typewriter-text" class="typewriter-text">
+            Born on the 15th of November ✨ Today, the entire universe aligns to celebrate the most radiant, wonderful soul in the world!
+          </p>
+          <span class="typewriter-cursor" aria-hidden="true"></span>
+        </div>
+
+        <p class="scene-subtitle" style="margin-bottom: 10px;">
+          May your year ahead be as breathtaking, inspiring, and delightfully sweet as your smile.
+        </p>
+
+        <!-- Scroll guidance -->
+        <button id="btn-scroll-to-gallery" class="scroll-hint-btn" type="button">
+          <span>Explore Your Memories & Wishes</span>
+          <svg class="arrow-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 3: FLOATING POLAROID PHOTO GALLERY
+       ========================================================================= -->
+  <section id="scene-gallery" class="scene">
+    <div class="container-wide">
+      <div class="date-pill">✨ Treasured Memories ✨</div>
+      <h2 class="scene-title text-rose-gold">Moments of Radiance</h2>
+      <p class="scene-subtitle">
+        A gallery celebrating your warmth, grace, and sparkling spirit.<br />
+        Hover, tilt, or tap any polaroid to take a closer look.
+      </p>
+
+      <!-- Polaroid Cards Grid -->
+      <div class="polaroid-grid">
+        <!-- Card 1 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo1.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">✨ Radiant Glow</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo1.jpg" alt="Sreoshi Roy - Radiant Glow" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Starlit Radiance</h3>
+          <p class="polaroid-subnote" data-full-note="Like the sweetest starlight in a midnight sky, your presence always brings effortless calm, joy, and beauty to everyone lucky to know you.">
+            Constellations of pure joy ✨
+          </p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo2.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">🌸 Golden Hour</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo2.jpg" alt="Sreoshi Roy - Golden Hour Joy" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Golden Hour Joy</h3>
+          <p class="polaroid-subnote" data-full-note="There is a warmth in your smile that mirrors the golden hour — gentle, breathtaking, and impossible to forget.">
+            Warmer than any sunset 🌅
+          </p>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo3.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">💫 Sweet Laughter</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo3.jpg" alt="Sreoshi Roy - Sweet Laughter" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Unforgettable Vibe</h3>
+          <p class="polaroid-subnote" data-full-note="Here is to every sweet laugh, every shared memory, and all the magical milestones waiting for you in this exciting new chapter of life!">
+            Laughter that warms the soul 💫
+          </p>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo4.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">🌟 Pure Magic</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo4.jpg" alt="Sreoshi Roy - Pure Magic" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Moments of Wonder</h3>
+          <p class="polaroid-subnote" data-full-note="Every little moment spent with you leaves a trail of happiness and good vibes that lingers long after.">
+            Glowing with fairy lights 🌟
+          </p>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo5.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">🌺 Grace & Charm</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo5.jpg" alt="Sreoshi Roy - Grace and Charm" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Everlasting Bloom</h3>
+          <p class="polaroid-subnote" data-full-note="True beauty comes from a gentle heart, a kind spirit, and an open soul. Sreoshi, you bloom with grace in everything you do.">
+            Effortlessly beautiful inside out 🌸
+          </p>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo6.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">💖 Warm Sunshine</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo6.jpg" alt="Sreoshi Roy - Warm Sunshine" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">Captivating Smile</h3>
+          <p class="polaroid-subnote" data-full-note="Never lose that natural sparkle in your eyes and the genuine warmth you share with the world around you.">
+            Spreading happiness everywhere 💖
+          </p>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="polaroid-card" data-default-img="assets/images/photo7.jpg">
+          <div class="washi-tape"></div>
+          <span class="polaroid-tag">👑 Birthday Queen</span>
+          <div class="polaroid-img-wrapper">
+            <img src="assets/images/photo7.jpg" alt="Sreoshi Roy - 15 November Birthday Queen" class="polaroid-img" loading="lazy" />
+          </div>
+          <h3 class="polaroid-caption">15 November Queen</h3>
+          <p class="polaroid-subnote" data-full-note="The world became a whole lot brighter on the 15th of November. Today, tomorrow, and always, the spotlight is on celebrating you!">
+            Celebrating Sreoshi today & always 🎂
+          </p>
+        </article>
+      </div>
+
+      <!-- Gallery Customization Bar -->
+      <div class="gallery-actions">
+        <button id="btn-upload-photo" class="btn-secondary" type="button">
+          📷 Personalize A Polaroid Photo
+        </button>
+        <button id="btn-reset-photos" class="btn-secondary" type="button">
+          ↺ Reset To Original Art
+        </button>
+        <input type="file" id="photo-file-input" accept="image/*" aria-label="Upload custom photo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 4: CLICKABLE WISH BUBBLES
+       ========================================================================= -->
+  <section id="scene-wishes" class="scene">
+    <div class="container-wide">
+      <div class="date-pill">💖 Magic In The Air 💖</div>
+      <h2 class="scene-title text-rose-gold">Catch A Floating Wish</h2>
+      <p class="scene-subtitle">
+        Shimmering wish bubbles are drifting in the midnight breeze.<br />
+        Tap each bubble to pop it and reveal a personalized birthday blessing for you!
+      </p>
+
+      <!-- Wish Counter Badge -->
+      <div class="wish-counter-badge">
+        <span id="wish-counter-text">0 / 6 Wishes Collected ✨</span>
+      </div>
+
+      <!-- Bubble Garden -->
+      <div class="wish-bubble-stage">
+        <!-- Bubble 1 -->
+        <div class="wish-bubble" data-wish-id="1" role="button" tabindex="0" aria-label="Wish bubble: Joy and laughs">
+          <span class="bubble-icon">💖</span>
+          <span class="bubble-title">Joy & Laughs</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+
+        <!-- Bubble 2 -->
+        <div class="wish-bubble" data-wish-id="2" role="button" tabindex="0" aria-label="Wish bubble: Secret dreams">
+          <span class="bubble-icon">🌟</span>
+          <span class="bubble-title">Secret Dreams</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+
+        <!-- Bubble 3 -->
+        <div class="wish-bubble" data-wish-id="3" role="button" tabindex="0" aria-label="Wish bubble: Inner peace">
+          <span class="bubble-icon">🕊️</span>
+          <span class="bubble-title">Inner Peace</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+
+        <!-- Bubble 4 -->
+        <div class="wish-bubble" data-wish-id="4" role="button" tabindex="0" aria-label="Wish bubble: Eternal radiance">
+          <span class="bubble-icon">🌸</span>
+          <span class="bubble-title">Eternal Radiance</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+
+        <!-- Bubble 5 -->
+        <div class="wish-bubble" data-wish-id="5" role="button" tabindex="0" aria-label="Wish bubble: Bright future">
+          <span class="bubble-icon">🚀</span>
+          <span class="bubble-title">Bright Future</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+
+        <!-- Bubble 6 -->
+        <div class="wish-bubble" data-wish-id="6" role="button" tabindex="0" aria-label="Wish bubble: Sweet blessings">
+          <span class="bubble-icon">🍫</span>
+          <span class="bubble-title">Sweet Blessings</span>
+          <span class="bubble-tap-label">Tap to Pop ✨</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 5: MAKE-A-WISH CANDLE, FIREWORKS & CLOSING MESSAGE
+       ========================================================================= -->
+  <section id="scene-candle" class="scene">
+    <div class="container-narrow">
+      <div class="date-pill">🕯️ The Golden Moment 🕯️</div>
+      <h2 class="scene-title text-rose-gold">Make A Birthday Wish</h2>
+      <p class="scene-subtitle">
+        Close your eyes, whisper your deepest wish into the universe, and blow out the birthday candle...
+      </p>
+
+      <!-- Interactive Candle & Cake -->
+      <div id="candle-stage" class="candle-stage">
+        <!-- Floating smoke wisp -->
+        <div class="smoke-wisp"></div>
+
+        <!-- Glowing candle -->
+        <div class="birthday-candle">
+          <div class="candle-wick"></div>
+          <div id="candle-flame" class="candle-flame" title="Tap flame to blow out"></div>
+          <div class="candle-flame-halo"></div>
+        </div>
+
+        <!-- Cake Base -->
+        <div class="cake-stand">
+          <div class="cake-tier">
+            <div class="frosting-layer"></div>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+      </div>
+
+      <!-- Controls to blow candle -->
+      <div class="candle-controls">
+        <button id="btn-blow-candle" class="btn-primary glow-pulse" type="button">
+          Blow Out the Candle 🎂
+        </button>
+
+        <button id="btn-mic-blow" class="btn-secondary" type="button">
+          <span class="mic-hint">🎙️ Or Blow Into Your Phone Mic</span>
+        </button>
+      </div>
+
+      <!-- Grand Finale Closing Letter Card (Revealed after candle is blown) -->
+      <div id="closing-card" class="closing-card">
+        <div class="date-pill">💌 A Letter For Sreoshi 💌</div>
+
+        <h3 class="letter-salutation">Dearest Sreoshi Roy,</h3>
+
+        <p class="letter-body">
+          Happy Birthday on this radiant <strong>15th of November</strong>!
+        </p>
+        <p class="letter-body">
+          May this new chapter of your life be filled with unfiltered joy, serendipitous adventures, and a peace that warms your soul like morning sunshine. You bring a rare, unforgettable warmth into the lives of everyone fortunate enough to cross your path.
+        </p>
+        <p class="letter-body">
+          Never stop dreaming courageously, laughing effortlessly, and shining as the truly extraordinary, luminous soul you are. May all your secret wishes take flight tonight!
+        </p>
+
+        <p class="letter-signoff">
+          With endless warmth & celebration ✨
+        </p>
+
+        <!-- Final Actions -->
+        <div class="closing-actions">
+          <button id="btn-replay-all" class="btn-primary" type="button">
+            Replay The Magic ↺
+          </button>
+          <button id="btn-share-link" class="btn-secondary" type="button">
+            Share Birthday Love 💖
+          </button>
+        </div>
+
+        <!-- Guestbook / Wishes Wall -->
+        <div class="guestbook-section">
+          <h4 class="guestbook-title">✨ Birthday Notes for Sreoshi ✨</h4>
+          <div id="guestbook-list" class="guestbook-list">
+            <!-- Populated via script.js -->
+          </div>
+
+          <form id="guestbook-form" class="guestbook-form">
+            <input type="text" id="guestbook-name" class="glass-input" placeholder="Your Name" required maxlength="30" />
+            <textarea id="guestbook-msg" class="glass-input" placeholder="Leave a heartfelt birthday note for Sreoshi..." required rows="2" maxlength="220"></textarea>
+            <button type="submit" class="btn-primary btn-sm">Post Note 💌</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODALS: LIGHTBOX & WISH CARD
+       ========================================================================= -->
+  <!-- Polaroid Lightbox Modal -->
+  <div id="lightbox-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Expanded memory preview" class="lightbox-img" />
+      </div>
+      <h3 id="lightbox-title" class="modal-title">Memory Preview</h3>
+      <p id="lightbox-note" class="modal-body"></p>
+    </div>
+  </div>
+
+  <!-- Wish Card Modal -->
+  <div id="wish-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="wish-modal-title">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div id="wish-modal-icon" class="modal-icon-badge">✨</div>
+      <h3 id="wish-modal-title" class="modal-title">Birthday Blessing</h3>
+      <p id="wish-modal-body" class="modal-body"></p>
+      <button class="btn-primary modal-close-btn-action" onclick="document.getElementById('wish-modal').classList.remove('active');">
+        Keep In My Heart 💖
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notice -->
+  <div id="toast-notice" class="toast-notice" role="alert" aria-live="polite"></div>
+
+  <!-- Main JavaScript Application -->
+  <script src="script.js"></script>
+</body>
+</html>

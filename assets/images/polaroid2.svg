@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sunsetSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b1138"/>
+      <stop offset="35%" stop-color="#5a1e4a"/>
+      <stop offset="70%" stop-color="#a04358"/>
+      <stop offset="100%" stop-color="#e8987d"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff5eb"/>
+      <stop offset="25%" stop-color="#ffbfa3"/>
+      <stop offset="60%" stop-color="#e27b68" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#a04358" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5e1f48"/>
+      <stop offset="50%" stop-color="#341334"/>
+      <stop offset="100%" stop-color="#190820"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="600" height="460" fill="url(#sunsetSky)"/>
+
+  <!-- Sun & Glow -->
+  <circle cx="300" cy="340" r="140" fill="url(#sunGlow)"/>
+  <circle cx="300" cy="340" r="55" fill="#fff5eb"/>
+
+  <!-- Sea -->
+  <rect y="440" width="600" height="260" fill="url(#seaGrad)"/>
+
+  <!-- Sunlight reflection on water -->
+  <ellipse cx="300" cy="455" rx="140" ry="8" fill="#ffd5be" opacity="0.6"/>
+  <ellipse cx="300" cy="480" rx="110" ry="6" fill="#fcae95" opacity="0.5"/>
+  <ellipse cx="300" cy="515" rx="80" ry="5" fill="#e8987d" opacity="0.4"/>
+  <ellipse cx="300" cy="550" rx="50" ry="4" fill="#ffbfa3" opacity="0.3"/>
+
+  <!-- Distant Birds -->
+  <path d="M 180 240 Q 190 230 200 240 Q 210 230 220 240" fill="none" stroke="#ffe3e0" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 235 210 Q 243 202 250 210 Q 257 202 265 210" fill="none" stroke="#ffe3e0" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 370 230 Q 378 222 385 230 Q 392 222 400 230" fill="none" stroke="#ffe3e0" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Silhouette Palm / Flora Accent -->
+  <path d="M 0 500 Q 80 430 110 330 Q 70 360 40 400 Q 10 440 0 500 Z" fill="#200d2b"/>
+  <path d="M 90 350 Q 150 310 180 270 Q 140 290 100 330 Z" fill="#200d2b"/>
+
+  <text x="300" y="650" font-family="'Great Vibes', cursive, serif" font-size="34" fill="#ffd1dc" text-anchor="middle">Golden Hour Joy</text>
+</svg>
